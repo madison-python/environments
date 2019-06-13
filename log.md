@@ -10,7 +10,7 @@ are the steps I completed:
 
 # First steps on a new machine
 
-[](img/fig1.png)
+![](img/fig1.png)
 
 1. Remove all the default programs from the dock. Add Terminal.app to the dock.
 1. Create or install SSH key.
