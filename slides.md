@@ -56,7 +56,7 @@ computer.
 
 # Captain's Log
 
-[madison-python/environments/log.md](https://github.com/madison-python/environments/master/log.md)
+[madison-python/environments/log.md](https://github.com/madison-python/environments/blob/master/log.md)
 
 # Python development tools
 
@@ -79,7 +79,7 @@ pyenv install --list | less
 pyenv install --list | grep 3.8
 pyenv install 3.8-dev  # error 1
 pyenv install 3.7.3    # error 2
-pyenv install anaconda3-2019.03  # ...
+pyenv install anaconda3-2019.03  # works but not perfect
 pyenv local 3.7.3  # creates .python-version
 pyenv global 3.7.3 # creates ~/.pyenv/version
 ```
@@ -91,12 +91,53 @@ pipenv install --python 3.7.3
 pipenv install flask
 pipenv install jinja2==2.10.1
 pipenv install --dev pytest
+pipenv --rm
+```
+
+# pipenv advanced
+
+```bash
+pipenv lock
+pipenv install jupyter --skip-lock
+pipenv sync
+```
+
+# pipenv tricks
+
+```bash
+pipenv run ./myscript.py
+pipenv run ipython
+pipenv shell
+```
+
+pipenv reads .env files!
+
+```
+# contents of .env
+MY_ENV_VAR=100
+
+$ pipenv run echo $MY_ENV_VAR
+```
+
+# Why I use pipenv
+
+1. pipenv install --python 3.6.7
+1. CMD-T + pipenv shell
+
+```
+$ heroku create
+Creating app... done, sheltered-bayou-58915
+https://sheltered-bayou-58915.herokuapp.com/ | https://git.heroku.com/sheltered-bayou-58915.git
+$ heroku run bash --app sheltered-bayou-58915
+Running bash on sheltered-bayou-58915... up, run.5201 (Free)
+~ $ python3 --version
+Python 3.6.7
 ```
 
 # pipenv gotchas
 
-1. pipenv + visual-studio-code
-1. pipenv install "typo"
+1. pipenv run code .
+1. pipenv install typo
 
 # Live demo
 
@@ -111,4 +152,4 @@ Roman numeral conversion as a Service (RaaS)
 
 - Can't write any production code until you have a failing test.
 - Can't write more production code than is required to pass the test.
-- Can't refactor in a way that adds functionality.
+- Can't refactor beyond existing functionality.

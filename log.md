@@ -40,13 +40,18 @@ xcode-select --install
 
 # Install global development tools
 
-[madison-python/environments/Brewfile](https://github.com/madison-python/environments/master/Brewfile)
+[madison-python/environments/Brewfile](https://github.com/madison-python/environments/blob/master/Brewfile)
 
 ```
 # Install from a Brewfile
 curl -fsSL \
     https://raw.githubusercontent.com/madison-python/environments/master/Brewfile |
     brew bundle --file=-
+
+# More typical
+git clone git@github.com:pedmiston/preferences.git ~/Preferences
+cd ~/Preferences
+brew bundle  # reads Brewfile
 ```
 
 # Configure zsh with oh-my-zsh
@@ -56,6 +61,12 @@ curl -fsSL \
 sh -c "$(curl -fsSL \
     https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
+
+# Configure password manager and log in to accounts
+
+- 1Password
+- `docker login`
+- `heroku login`
 
 # Activate pyenv
 
