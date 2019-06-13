@@ -153,3 +153,11 @@ Roman numeral conversion as a Service (RaaS)
 - Can't write any production code until you have a failing test.
 - Can't write more production code than is required to pass the test.
 - Can't refactor beyond existing functionality.
+
+# Foreshadowing
+
+- pytest-watch
+- pre-commit (black, flake8)
+- flask
+- unittest.mock
+- docker
