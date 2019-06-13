@@ -15,9 +15,11 @@ brew "rbenv"
 brew "nvm"
 brew "yarn"
 
+# R development
+brew "r"
+cask "rstudio"
+
 # Editors
-brew "vim"
-brew "tmux"
 cask "visual-studio-code"
 
 # Secrets management

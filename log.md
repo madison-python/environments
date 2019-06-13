@@ -4,18 +4,26 @@ I want to clean install a new version of macOS on my computer. Here
 are the steps I completed:
 
 1. Backed up to an external drive.
-1. Downloaded macOS and installed it on a USB drive. See [How to create a bootable installer for macOS](https://support.apple.com/en-us/HT201372)
+1. Downloaded macOS and installed it on a USB drive. See [How to create a bootable installer for macOS](https://support.apple.com/en-us/HT201372).
 1. Delete the hard drive.
 1. Install macOS from the USB drive.
 
 # First steps on a new machine
 
+[](img/fig1.png)
+
 1. Remove all the default programs from the dock. Add Terminal.app to the dock.
-1. Install SSH key.
+1. Create or install SSH key.
 
 ```
-mkdir -m 0644 ~/.ssh
+# Create a new SSH key
+ssh-keygen -t rsa -C pierce.edmiston@gmail.com
+
+# Install an existing key
+mkdir -m 0700 ~/.ssh
 cp /Volumes/PIERCE/id_rsa* ~/.ssh/
+chmod 0600 ~/.ssh/id_rsa
+chmod 0644 ~/.ssh/id_rsa.pub
 ssh-add
 ```
 
@@ -26,14 +34,18 @@ ssh-add
 xcode-select --install
 
 # Install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/usr/bin/ruby -e "$(curl -fsSL \
+    https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
 # Install global development tools
 
+[madison-python/environments/Brewfile](https://github.com/madison-python/environments/master/Brewfile)
+
 ```
 # Install from a Brewfile
-curl -fsSL https://raw.githubusercontent.com/madison-python/environments/master/Brewfile |
+curl -fsSL \
+    https://raw.githubusercontent.com/madison-python/environments/master/Brewfile |
     brew bundle --file=-
 ```
 
@@ -41,49 +53,27 @@ curl -fsSL https://raw.githubusercontent.com/madison-python/environments/master/
 
 ```
 # Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL \
+    https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
+
+# Activate pyenv
 
 ```
 # contents of ~/.zshrc
+# ...
 eval "$(pyenv init -)"
 ```
 
-# pyenv
-
-```bash
-pyenv install --list | less
-pyenv install --list | grep 3.8
-pyenv install 3.8-dev  # error 1
-pyenv install 3.7.3    # error 2
-pyenv install anaconda3-2019.03  #
-```
-
-# Error installing 3.7.3
+# Install python 3.7.3
 
 ```
 $ pyenv install 3.7.3
 # ...
 zipimport.ZipImportError: can't decompress data; zlib not available
 
-$ xcode-select install
-$ sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+$ sudo installer -pkg \
+    /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg \
+    -target /
 $ pyenv install 3.7.3
 ```
-
-# pipenv gotchas
-
-1. pipenv + code
-1. pipenv install typo
-
-# conda
-
-**conda**
-:   Python virtualenv manager for scientific computing.
-
-```bash
-pyenv versions
-which python
-which conda
-```
-
